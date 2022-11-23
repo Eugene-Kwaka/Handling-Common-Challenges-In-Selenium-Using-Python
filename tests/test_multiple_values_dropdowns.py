@@ -16,8 +16,8 @@ def test_multiple_values_dropdown():
     options.browser_version = "107.0"
     options.platform_name = "Windows 10"
     lt_options = {};
-    lt_options["username"] = "himanshujlambdatest";
-    lt_options["accessKey"] = "7A6pDWfFCavmJajP7466YAnCaH5pndMtfG0TnsSbfaPzUeJmu3";
+    lt_options["username"] = os.environ.get("LT_USERNAME");
+    lt_options["accessKey"] = os.environ.get("LT_ACCESS_KEY");
     lt_options["build"] = "Handling Multiple Values Selection in Dropdowns";
     lt_options["project"] = "Handling Multiple Values Selection in Dropdowns";
     lt_options["name"] = "Handling Multiple Values Selection in Dropdowns";
