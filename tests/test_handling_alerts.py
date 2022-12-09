@@ -3,8 +3,8 @@ import pytest
 from selenium import webdriver
 import tests.constants as self
 from selenium.webdriver.common.by import By
-# from selenium.webdriver.support.ui import WebDriverWait
-# from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 
 
@@ -28,7 +28,8 @@ def test_handling_simple_alert():
     driver.get("https://www.lambdatest.com/selenium-playground/javascript-alert-box-demo")
     # Locate the button to create the simple alert
     # alert_button = driver.find_element(By.XPATH, '/html/body/div[1]/section[3]/div/div/div[2]/div[3]/p[3]/button')
-    alert_button = driver.find_element(By.XPATH, '//*[@id="__next"]/section[4]/div/div/div[2]/div[3]/p[3]/button')
+    # alert_button = driver.find_element(By.XPATH, '//*[@id="__next"]/section[4]/div/div/div[2]/div[3]/p[3]/button')
+    alert_button = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="__next"]/section[4]/div/div/div[2]/div[3]/p[3]/button')))
     alert_button.click()
     # Switch the webdriver's control to the alert pop-up
     alert_object = driver.switch_to.alert
