@@ -2,11 +2,10 @@ import os
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-# from selenium.webdriver.support.ui import WebDriverWait
-# from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver import ActionChains
-
 
 
 def test_handling_simple_alert():
@@ -30,9 +29,12 @@ def test_handling_simple_alert():
     remote_url =  "https://" + user_name + ":" + accesskey + "@hub.lambdatest.com/wd/hub"
     driver = webdriver.Remote(remote_url, options=options)
     driver.get("https://www.lambdatest.com/selenium-playground/drag-drop-range-sliders-demo")
-    source = driver.find_element(By.CSS_SELECTOR, "input[value='5']")
+    
+    # source = driver.find_element(By.CSS_SELECTOR, "input[value='5']")
+    source = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[value='5']")))
     print("I am dragging the mouse from: ", source.get_attribute("value"))
-    target = driver.find_element(By.CSS_SELECTOR, "input[value='50']")
+    # target = driver.find_element(By.CSS_SELECTOR, "input[value='50']")
+    target = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[value='50']")))
     print("I'm dropping the mouse at: ", target.get_attribute("value"))
     action = ActionChains(driver)
     action.drag_and_drop(source, target).perform()
