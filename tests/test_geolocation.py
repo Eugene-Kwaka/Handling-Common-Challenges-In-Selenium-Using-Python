@@ -14,8 +14,8 @@ def geolocation_test():
     options.browser_version = "107.0"
     options.platform_name = "Windows 10"
     lt_options = {};
-    lt_options["username"] = "himanshujlambdatest";
-    lt_options["accessKey"] = "7A6pDWfFCavmJajP7466YAnCaH5pndMtfG0TnsSbfaPzUeJmu3";
+    lt_options["username"] = os.environ.get('LT_USERNAME');
+    lt_options["accessKey"] = os.environ.get('LT_ACCESS_KEY');
     lt_options["geoLocation"] = "US";
     lt_options["build"] = "Geolocation Testing";
     lt_options["project"] = "Geolocation Testing";
