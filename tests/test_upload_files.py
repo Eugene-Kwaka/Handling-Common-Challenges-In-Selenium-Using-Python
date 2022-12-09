@@ -1,11 +1,10 @@
 import os
 import pytest
 from selenium import webdriver
-import tests.constants as self
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options as ChromeOptions
-# from selenium.webdriver.support.ui import WebDriverWait
-# from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 def test_file_uploads():
@@ -32,9 +31,10 @@ def test_file_uploads():
     # Access website to automate file upload
     driver.get("http://demo.automationtesting.in/FileUpload.html")
     # locate the file upload button in the page using XPATH
-    file_upload = driver.find_element(By.XPATH, '//*[@id="input-4"]')
+    # file_upload = driver.find_element(By.XPATH, '//*[@id="input-4"]')
+    file_upload = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, '//*[@id="input-4"]')))
     # The Send Keys method will include the path for the file that will be uploaded.
-    file_upload.send_keys(r"C:\Users\Eugene Kwaka\Desktop\Selenium Grid Online  Run Selenium Test On Cloud.pdf")
+    file_upload.send_keys(r"C:\Users\Eugene Kwaka\Desktop\SeleniumDoc.pdf")
     print("file uploaded successfully")
     
     driver.close()
