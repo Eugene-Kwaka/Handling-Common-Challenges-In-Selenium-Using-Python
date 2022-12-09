@@ -1,14 +1,13 @@
 import os
 import pytest
 from selenium import webdriver
-import tests.constants as self
 from selenium.webdriver.common.by import By
-# from selenium.webdriver.support.ui import WebDriverWait
-# from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.support.select import Select
-from selenium.webdriver import ActionChains
 from selenium.webdriver.common.keys import Keys
+# from selenium.webdriver import ActionChains
 
 
 def test_multiple_values_dropdown():
@@ -34,7 +33,8 @@ def test_multiple_values_dropdown():
     driver.get("https://www.lambdatest.com/selenium-playground/jquery-dropdown-search-demo")
     
     # Find the multiselect dropdown element in the page
-    dropdown = driver.find_element(By.XPATH, '//*[@id="__next"]/div/section[3]/div/div/div[2]/div[2]/div[2]/select')
+    # dropdown = driver.find_element(By.XPATH, '//*[@id="__next"]/div/section[3]/div/div/div[2]/div[2]/div[2]/select')
+    dropdown = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, '//*[@id="__next"]/div/section[3]/div/div/div[2]/div[2]/div[2]/select')))
     # if dropdown.get_attribute("multiple"):
     #     print("multiple select options can be chosen")
     # else:
