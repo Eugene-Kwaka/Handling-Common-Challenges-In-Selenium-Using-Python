@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.remote.file_detector import LocalFileDetector
 
 
 def test_file_uploads():
@@ -27,14 +28,22 @@ def test_file_uploads():
     accesskey = os.environ.get('LT_ACCESS_KEY')
     remote_url =  "https://" + user_name + ":" + accesskey + "@hub.lambdatest.com/wd/hub"
     driver = webdriver.Remote(remote_url, options=options)
-    
+    driver.file_detector = LocalFileDetector()
     # Access website to automate file upload
-    driver.get("http://demo.automationtesting.in/FileUpload.html")
+    driver.get("https://blueimp.github.io/jQuery-File-Upload/")
     # locate the file upload button in the page using XPATH
     # file_upload = driver.find_element(By.XPATH, '//*[@id="input-4"]')
-    file_upload = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, '//*[@id="input-4"]')))
+    file_upload = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, "//input[@name='files[]']")))
     # The Send Keys method will include the path for the file that will be uploaded.
-    file_upload.send_keys(r"C:\Users\Eugene Kwaka\Desktop\SeleniumDoc.pdf")
-    print("file uploaded successfully")
+    file_upload.send_keys(r"C:\Users\Eugene Kwaka\Pictures\Saved Pictures\lambdatestgoodies.jpg")
+    
+    start_upload = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH,'//*[@id="fileupload"]/table/tbody/tr/td[4]/button[2]')))
+    start_upload.click() 
+    
+    # is_displayed method is used to check if an element is visible to user or not.
+    if driver.find_element(By.XPATH, '//*[@id="fileupload"]/table').is_displayed:
+        print("file uploaded successfully")
+    else:
+        print("File not uploaded")
     
     driver.close()
