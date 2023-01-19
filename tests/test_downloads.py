@@ -19,9 +19,11 @@ def test_download_files():
     lt_options["w3c"] = True;
     lt_options["plugin"] = "python-python";
     options.set_capability('LT:Options', lt_options);
-    # Specify the location I want the PDF file to be downloaded to.
-    # prefs = {"download.default_directory": "C:\SeleniumDownloadedFiles"};
-    # options.add_experimental_option("prefs", prefs);
+    
+    
+    prefs = {"download.default_directory": False};
+    options.add_experimental_option("prefs", prefs);
+    
     
     # LambdaTest Profile username
     user_name = os.environ.get('LT_USERNAME')
@@ -32,11 +34,12 @@ def test_download_files():
     
     # Download the PDF file.
     driver.get("https://chromedriver.storage.googleapis.com/index.html?path=79.0.3945.36/")
-    # pdf_button = driver.find_element(By.XPATH, '//*[@id="example_wrapper"]/div[1]/a[4]')
-    pdf_button = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.XPATH, '/html/body/table/tbody/tr[6]/td[2]/a')))
-    pdf_button.click()
-    # print("successfully downloaded the pdf file to DownloadedFiles folder")
-    print("Succussfully downloaded the pdf file")
+    download_element = driver.find_element(By.XPATH, '/html/body/table/tbody/tr[6]/td[2]/a')
+    download_element.click()
+    
+    
+    
+    print("Succussfully downloaded the file")
     
     
     driver.close()

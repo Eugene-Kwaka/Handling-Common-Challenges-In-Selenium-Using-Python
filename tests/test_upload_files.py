@@ -32,7 +32,6 @@ def test_file_uploads():
     # Access website to automate file upload
     driver.get("https://blueimp.github.io/jQuery-File-Upload/")
     # locate the file upload button in the page using XPATH
-    # file_upload = driver.find_element(By.XPATH, '//*[@id="input-4"]')
     file_upload = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, "//input[@name='files[]']")))
     # The Send Keys method will include the path for the file that will be uploaded.
     file_upload.send_keys(r"C:\Users\Eugene Kwaka\Pictures\Saved Pictures\lambdatestgoodies.jpg")
