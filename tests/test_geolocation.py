@@ -1,17 +1,16 @@
 import os
 import pytest
 from selenium import webdriver
-import tests.constants as self
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options as ChromeOptions
-from selenium.webdriver.support.select import Select
-# from selenium.webdriver.support.ui import WebDriverWait
-# from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
-def geolocation_test():
+def test_geolocation_test():
     options = ChromeOptions()
-    options.browser_version = "107.0"
+    options.browser_version = "108.0"
     options.platform_name = "Windows 10"
     lt_options = {};
     lt_options["username"] = os.environ.get('LT_USERNAME');
@@ -37,10 +36,13 @@ def geolocation_test():
     accuracy = 100
     
     driver.execute_cdp_cmd("Emulation.setGeolocationOverride", {
-        latitude : 41.9521,
-        longitude : -91.6853,
-        accuracy : 100
+        "latitude ": latitude,
+        "longitude" : longitude,
+        accuracy : accuracy
     })
     
-    driver.get("https://www.lambdatest.com/selenium-playground/geolocation-testing")
-    location =  driver.find_element(By.CSS_SELECTOR, ".icon-geolocate")
+    driver.get("https://www.dennys.com/order")
+    location =  WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="locationSearch"]')))
+    location.send_keys(Keys.ENTER)
+    # location.click()
+    print("Test completed successfully")
