@@ -1,5 +1,4 @@
 import os
-import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -7,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.keys import Keys
-# from selenium.webdriver import ActionChains
+
 
 
 def test_multiple_values_dropdown():
@@ -33,36 +32,15 @@ def test_multiple_values_dropdown():
     driver.get("https://www.lambdatest.com/selenium-playground/jquery-dropdown-search-demo")
     
     # Find the multiselect dropdown element in the page
-    # dropdown = driver.find_element(By.XPATH, '//*[@id="__next"]/div/section[3]/div/div/div[2]/div[2]/div[2]/select')
     dropdown = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, '//*[@id="__next"]/div/section[3]/div/div/div[2]/div[2]/div[2]/select')))
-    # if dropdown.get_attribute("multiple"):
-    #     print("multiple select options can be chosen")
-    # else:
-    #     print("only one select option can be selected")
-   
-    
+
     # Using the webdriver Select class to select multiple values
     multi_select = Select(dropdown)
-    
     multi_select.select_by_index(0)
     multi_select.select_by_value("AZ")
     multi_select.select_by_visible_text("Iowa")
     print("All selected values using the SELECT Class in the dropdown are: \n")
     for option in multi_select.all_selected_options:
         print(option.get_attribute('innerText'))
-    
-    # # Using actionChains class to select multiple values in the dropdown
-    # dropdown_element= Select(dropdown)
-    # option1 = driver.find_element(By.XPATH, '//*[@id="__next"]/div/section[3]/div/div/div[2]/div[2]/div[2]/select/option[5]')
-    # option2 = driver.find_element(By.XPATH, '//*[@id="__next"]/div/section[3]/div/div/div[2]/div[2]/div[2]/select/option[10]')
-    # option3 = driver.find_element(By.XPATH, '//*[@id="__next"]/div/section[3]/div/div/div[2]/div[2]/div[2]/select/option[33]')
-    # ActionChains(driver).key_down(Keys.CONTROL).click(option1).key_up(Keys.CONTROL).perform()
-    # ActionChains(driver).key_down(Keys.CONTROL).click(option2).key_up(Keys.CONTROL).perform()
-    # ActionChains(driver).key_down(Keys.CONTROL).click(option3).key_up(Keys.CONTROL).perform()
-    # print("The values selected using ActionChains are: \n")
-    # for opt in dropdown_element.all_selected_options:
-    #     print(opt.get_attribute('innerText'))
-    
-    
-    
+
     driver.close()
