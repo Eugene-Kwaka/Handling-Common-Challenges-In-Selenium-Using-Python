@@ -30,7 +30,7 @@ def test_handling_jquey_datepicker():
     # expected dates to be selected
     from_date_target = '05/10/2023'
     to_date_target = '06/25/2023'
-    
+
     from_date = '10'
     to_date  = '25'
     
@@ -38,12 +38,12 @@ def test_handling_jquey_datepicker():
     # clicking on the from_date picker
     from_date_picker = driver.find_element(By.XPATH, "//input[@id='from']")
     from_date_picker.click()
-    
+
     from_month = driver.find_element(By.XPATH, "//select[@class='ui-datepicker-month']")
     # We use the Select() method to select the target month we want
     from_month_selected = Select(from_month)
     from_month_selected.select_by_visible_text('May')
-    
+
     from_day = driver.find_element(By.XPATH,"//td[not(contains(@class,'ui-datepicker-month'))]/a[text()='" + from_date + "']")
     from_day.click()
     
@@ -51,18 +51,17 @@ def test_handling_jquey_datepicker():
     # To date
     to_date_picker = driver.find_element(By.XPATH, "//input[@id='to']")
     to_date_picker.click()
-    
+
     to_month = driver.find_element(By.XPATH, "//select[@class='ui-datepicker-month']")
     to_month_selected = Select(to_month)
     to_month_selected.select_by_visible_text('Jun')    
-    
+
     to_day = driver.find_element(By.XPATH,"//td[not(contains(@class,'ui-datepicker-month'))]/a[text()='" + to_date + "']")
     to_day.click()
     
     
-    # Assert the selected dates
+# Assert the selected dates
     expected_from_date = from_date_picker.get_attribute('value')
-    # assertEqual(expected_from_date, from_date_target)
     if expected_from_date == from_date_target:
         print("From date selected:", expected_from_date)
         
@@ -70,4 +69,7 @@ def test_handling_jquey_datepicker():
     if expected_to_date == to_date_target:
         print("To date selected:", expected_to_date)
 
-    driver.quit()
+    driver.close()
+    
+    
+    

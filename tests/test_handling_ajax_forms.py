@@ -2,10 +2,11 @@ import os
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options as ChromeOptions
-from selenium.webdriver.support.select import Select
+
 
 
 def test_ajax_forms():
@@ -30,7 +31,7 @@ def test_ajax_forms():
     driver = webdriver.Remote(remote_url, options=options)
     
     driver.get("https://codepen.io/getform/pen/jRoexL")
-    
+
     # Get into the iFrame 
     driver.switch_to.frame(driver.find_element(By.TAG_NAME, "iframe"))
     
@@ -38,9 +39,9 @@ def test_ajax_forms():
     form = driver.find_element(By.XPATH, '//*[@id="ajaxForm"]')
     # Identify the forms inputs and enter data through send_keys  
     email_element = form.find_element(By.XPATH, '//*[@id="exampleInputEmail1"]')
-    email_element.send_keys('myemail@gmail.com')
+    email_element.send_keys('youremail@gmail.com')
     name_element = form.find_element(By.XPATH, '//*[@id="exampleInputName"]')
-    name_element.send_keys('Eugene')
+    name_element.send_keys('yourname')
     # Locate the dropdown 
     platform_element = Select(form.find_element(By.XPATH, '//*[@id="exampleFormControlSelect1"]'))
     platform_element.select_by_visible_text('Github')
@@ -48,11 +49,9 @@ def test_ajax_forms():
     submit.click()
     
     # Wait for the ajax request to complete
-    try:
-        response = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="ajaxForm"]/div[4]')))
-        print(response.text)
-    
-    finally:
-        driver.quit()
+    response = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="ajaxForm"]/div[4]')))
+    print(response.text)
+
+    driver.quit()
         
-    
+   

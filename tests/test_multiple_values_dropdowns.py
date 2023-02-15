@@ -5,7 +5,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.support.select import Select
-from selenium.webdriver.common.keys import Keys
 
 
 
@@ -30,7 +29,7 @@ def test_multiple_values_dropdown():
     remote_url =  "https://" + user_name + ":" + accesskey + "@hub.lambdatest.com/wd/hub"
     driver = webdriver.Remote(remote_url, options=options)
     driver.get("https://www.lambdatest.com/selenium-playground/jquery-dropdown-search-demo")
-    
+
     # Find the multiselect dropdown element in the page
     dropdown = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, '//*[@id="__next"]/div/section[3]/div/div/div[2]/div[2]/div[2]/select')))
 
@@ -44,3 +43,4 @@ def test_multiple_values_dropdown():
         print(option.get_attribute('innerText'))
 
     driver.close()
+    

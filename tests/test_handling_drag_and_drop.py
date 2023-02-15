@@ -30,15 +30,11 @@ def test_handling_simple_alert():
     driver = webdriver.Remote(remote_url, options=options)
     driver.get("https://www.lambdatest.com/selenium-playground/drag-drop-range-sliders-demo")
     
-    # source = driver.find_element(By.CSS_SELECTOR, "input[value='5']")
     source = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[value='5']")))
     print("I am dragging the mouse from: ", source.get_attribute("value"))
-    # target = driver.find_element(By.CSS_SELECTOR, "input[value='50']")
     target = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[value='50']")))
     print("I'm dropping the mouse at: ", target.get_attribute("value"))
-    action = ActionChains(driver)
-    action.drag_and_drop(source, target).perform()
-    print("The mouse dragged from 5 to 50")
-    driver.close()
-    
-    
+action = ActionChains(driver)
+action.drag_and_drop(source, target).perform()
+print("The mouse dragged from 5 to 50")
+driver.close()

@@ -20,11 +20,6 @@ def test_download_files():
     lt_options["plugin"] = "python-python";
     options.set_capability('LT:Options', lt_options);
     
-    
-    prefs = {"download.default_directory": False};
-    options.add_experimental_option("prefs", prefs);
-    
-    
     # LambdaTest Profile username
     user_name = os.environ.get('LT_USERNAME')
     # LambdaTest Profile access_key
@@ -37,10 +32,7 @@ def test_download_files():
     download_element = driver.find_element(By.XPATH, '/html/body/table/tbody/tr[6]/td[2]/a')
     download_element.click()
     
-    
-    
     print("Succussfully downloaded the file")
-    
     
     driver.close()
     

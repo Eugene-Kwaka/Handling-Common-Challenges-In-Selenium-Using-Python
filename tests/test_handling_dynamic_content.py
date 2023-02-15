@@ -28,12 +28,12 @@ def test_dynamic_content():
     driver = webdriver.Remote(remote_url, options=options)
     
     driver.get("https://the-internet.herokuapp.com/dynamic_loading/2")
-    # locate the button start to dynamically
+    # locate the start_button 
     start_button = driver.find_element(By.XPATH, '//*[@id="start"]/button')
     start_button.click()
     # Waiting for the text to appear after clicking the start_button
     finish_element = WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="finish"]/h4')))
     print(finish_element.text)
+
+    driver.close()
     
-        
-    driver.quit()
