@@ -3,6 +3,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.support.select import Select
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 def test_handling_jquey_datepicker():
@@ -34,6 +36,7 @@ def test_handling_jquey_datepicker():
     from_date = '10'
     to_date  = '25'
     
+    
     # From date
     # clicking on the from_date picker
     from_date_picker = driver.find_element(By.XPATH, "//input[@id='from']")
@@ -44,9 +47,9 @@ def test_handling_jquey_datepicker():
     from_month_selected = Select(from_month)
     from_month_selected.select_by_visible_text('May')
 
-    from_day = driver.find_element(By.XPATH,"//td[not(contains(@class,'ui-datepicker-month'))]/a[text()='" + from_date + "']")
+    from_day = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH,"//td[not(contains(@class,'ui-datepicker-month'))]/a[text()='" + from_date + "']")))
     from_day.click()
-    
+
     
     # To date
     to_date_picker = driver.find_element(By.XPATH, "//input[@id='to']")
@@ -56,11 +59,11 @@ def test_handling_jquey_datepicker():
     to_month_selected = Select(to_month)
     to_month_selected.select_by_visible_text('Jun')    
 
-    to_day = driver.find_element(By.XPATH,"//td[not(contains(@class,'ui-datepicker-month'))]/a[text()='" + to_date + "']")
+    to_day = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH,"//td[not(contains(@class,'ui-datepicker-month'))]/a[text()='" + to_date + "']")))
     to_day.click()
+  
     
-    
-# Assert the selected dates
+    # Assert the selected dates
     expected_from_date = from_date_picker.get_attribute('value')
     if expected_from_date == from_date_target:
         print("From date selected:", expected_from_date)

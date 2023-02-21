@@ -31,7 +31,7 @@ def test_file_uploads():
     # locate the file upload button on the page using XPATH
     file_upload = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, "//input[@name='files[]']")))
     # The Send Keys method will include the path for the file that will be uploaded.
-    file_upload.send_keys(r"C:\Users\Pictures\Logo.jpg")
+    file_upload.send_keys(r"C:\Users\Eugene Kwaka\Desktop\ScreenShots\Saved Pictures\lambdatestgoodies.jpg")
     
     start_upload = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH,'//*[@id="fileupload"]/table/tbody/tr/td[4]/button[2]')))
     start_upload.click() 

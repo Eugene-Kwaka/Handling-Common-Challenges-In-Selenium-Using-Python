@@ -35,8 +35,11 @@ def test_multiple_values_dropdown():
 
     # Using the webdriver Select class to select multiple values
     multi_select = Select(dropdown)
+    driver.implicitly_wait(3)
     multi_select.select_by_index(0)
+    driver.implicitly_wait(3)
     multi_select.select_by_value("AZ")
+    driver.implicitly_wait(3)
     multi_select.select_by_visible_text("Iowa")
     print("All selected values using the SELECT Class in the dropdown are: \n")
     for option in multi_select.all_selected_options:
