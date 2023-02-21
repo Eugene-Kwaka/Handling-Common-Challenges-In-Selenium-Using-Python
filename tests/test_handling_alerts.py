@@ -30,8 +30,7 @@ def test_handling_simple_alert():
     driver.get("https://www.lambdatest.com/selenium-playground/javascript-alert-box-demo")
     
     # Locate the button that prompts the alert
-    alert_button = driver.find_element(By.XPATH, '//*[@id="__next"]/section[4]/div/div/div[2]/div[3]/p[3]/button')
-    # alert_button = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="__next"]/section[4]/div/div/div[2]/div[3]/p[3]/button')))
+    alert_button = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="__next"]/section[4]/div/div/div[2]/div[3]/p[3]/button')))
     alert_button.click()
     # Switch the webdriver's control to the alert pop-up
     alert_object = driver.switch_to.alert
